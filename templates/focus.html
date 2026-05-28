@@ -1,1 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Mode</title>
 
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white flex items-center justify-center min-h-screen">
+
+<div class="text-center max-w-2xl">
+
+    <h1 class="text-6xl font-bold mb-10">Focus Mode</h1>
+
+    {% if tasks %}
+        <div class="bg-[#111827] p-10 rounded-3xl">
+            <h2 class="text-4xl font-semibold mb-6">{{ tasks[0].title }}</h2>
+
+            <div id="timer" class="text-7xl font-bold mb-8">
+                25:00
+            </div>
+
+            <button
+                onclick="startTimer()"
+                class="bg-green-500 px-8 py-4 rounded-2xl text-2xl"
+            >
+                Start Session
+            </button>
+        </div>
+    {% else %}
+        <p>No tasks available.</p>
+    {% endif %}
+
+</div>
+
+<script>
+let time = 1500;
+
+function startTimer() {
+    const timer = document.getElementById('timer');
+
+    const interval = setInterval(() => {
+        let minutes = Math.floor(time / 60);
+        let seconds = time % 60;
+
+        timer.innerHTML = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+        time--;
+
+        if (time < 0) {
+            clearInterval(interval);
+            alert('Focus Session Completed 🌱');
+        }
+    }, 1000);
+}
+</script>
+
+</body>
+</html>
