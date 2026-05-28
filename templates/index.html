@@ -1,1 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloomTrack</title>
 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-[#0f172a] text-white min-h-screen">
+
+<div class="max-w-5xl mx-auto p-6">
+
+    <div class="flex items-center justify-between mb-10">
+        <div>
+            <h1 class="text-5xl font-bold mb-2">BloomTrack 🌱</h1>
+            <p class="text-gray-400">Grow slowly. Progress honestly.</p>
+        </div>
+
+        <a href="/dashboard" class="bg-purple-600 px-5 py-3 rounded-2xl hover:scale-105 transition">
+            Dashboard
+        </a>
+    </div>
+
+
+    <div class="glass-card p-6 rounded-3xl mb-8">
+        <form action="/add_task" method="POST" class="grid md:grid-cols-3 gap-4">
+
+            <input
+                type="text"
+                name="title"
+                placeholder="Enter task"
+                class="bg-[#1e293b] p-4 rounded-2xl outline-none"
+                required
+            >
+
+            <input
+                type="number"
+                name="estimated"
+                placeholder="Estimated Minutes"
+                class="bg-[#1e293b] p-4 rounded-2xl outline-none"
+                required
+            >
+
+            <button class="bg-green-500 hover:bg-green-600 rounded-2xl text-lg font-semibold">
+                Add Seed
+            </button>
+
+        </form>
+    </div>
+
+
+    <div class="grid gap-5">
+
+        {% for task in tasks %}
+
+        <div class="glass-card rounded-3xl p-5 flex justify-between items-center">
+
+            <div>
+                <h2 class="text-2xl font-semibold">{{ task.title }}</h2>
+                <p class="text-gray-400 mt-1">
+                    Estimated: {{ task.estimated_minutes }} min
+                </p>
+            </div>
+
+            {% if task.completed %}
+                <div class="text-green-400 text-3xl">✓</div>
+</html>
